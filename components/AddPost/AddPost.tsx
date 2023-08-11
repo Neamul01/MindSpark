@@ -16,6 +16,7 @@ export default function AddPost() {
     description: "",
     file: null as File | null,
   });
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -31,6 +32,12 @@ export default function AddPost() {
           ...prevData,
           file: files[0],
         }));
+        // Display the selected image preview
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          setSelectedImage(event.target!.result as string);
+        };
+        reader.readAsDataURL(files[0]);
       }
     } else {
       setFormData((prevData) => ({
@@ -115,6 +122,12 @@ export default function AddPost() {
           />
         </div>
         <Button type="submit">Submit</Button>
+        {selectedImage && (
+          <div className="mt-4">
+            <h2 className="font-bold mb-2">Selected Image Preview:</h2>
+            <img src={selectedImage} alt="Selected" className="max-w-full" />
+          </div>
+        )}
       </form>
     </div>
   );
