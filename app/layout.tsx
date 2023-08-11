@@ -2,6 +2,7 @@ import SiteNavbar from "@/components/Navbars/SiteNavbar";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import SiteFooter from "@/components/Footers/SiteFooter";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,9 @@ export default function RootLayout({
           <SiteNavbar />
         </header>
         <main>{children}</main>
-        <footer></footer>
+        <footer>
+          <SiteFooter />
+        </footer>
       </body>
     </html>
   );

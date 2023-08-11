@@ -5,6 +5,7 @@ import Image from "next/image";
 import React from "react";
 import Layout from "../Layouts/Layout/Layout";
 import { usePathname } from "next/navigation";
+import AppLogo from "../Common/AppLogo";
 
 export default function SiteNavbar() {
   const router = usePathname();
@@ -22,19 +23,7 @@ export default function SiteNavbar() {
   return (
     <Layout>
       <Navbar fluid rounded>
-        <Navbar.Brand href="/">
-          <Image
-            alt="Flowbite React Logo"
-            className="mr-3 h-6 sm:h-9"
-            height={36}
-            width={36}
-            priority
-            src="/vercel.svg"
-          />
-          <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-            MindSpark
-          </span>
-        </Navbar.Brand>
+        <AppLogo />
         <div className="flex md:order-2">
           <Dropdown
             inline
