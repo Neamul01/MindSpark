@@ -14,6 +14,7 @@ export default function SiteNavbar() {
       active={router.indexOf(tab.href) !== -1}
       key={tab.id}
       href={tab.href}
+      className="text-secondary active:text-primary"
     >
       {tab.title}
     </Navbar.Link>
