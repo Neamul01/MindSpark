@@ -14,6 +14,9 @@ const config: Config = {
         primary: {},
         secondary: {},
       },
+      maxWidth: {
+        layout: "1200px",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
