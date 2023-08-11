@@ -24,8 +24,8 @@ export default function SiteFooter() {
               <div>
                 <Footer.Title title="about" />
                 <Footer.LinkGroup col>
-                  <Footer.Link href="#">Flowbite</Footer.Link>
-                  <Footer.Link href="#">Tailwind CSS</Footer.Link>
+                  <Footer.Link href="#">MindSpark</Footer.Link>
+                  <Footer.Link href="#">Gallery</Footer.Link>
                 </Footer.LinkGroup>
               </div>
               <div>
