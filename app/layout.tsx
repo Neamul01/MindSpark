@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import SiteFooter from "@/components/Footers/SiteFooter";
+import { PostProvider } from "@/contexts/UploadPosts";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,15 +19,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <header>
-          <SiteNavbar />
-        </header>
-        <>{children}</>
-        <footer>
-          <SiteFooter />
-        </footer>
-      </body>
+      <PostProvider>
+        <body className={inter.className}>
+          <header>
+            <SiteNavbar />
+          </header>
+          <>{children}</>
+          <footer>
+            <SiteFooter />
+          </footer>
+        </body>
+      </PostProvider>
     </html>
   );
 }

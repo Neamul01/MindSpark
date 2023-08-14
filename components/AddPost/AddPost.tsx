@@ -9,6 +9,7 @@ import {
 } from "flowbite-react";
 import React, { ChangeEvent, useState } from "react";
 import H2Heading from "../Common/H2Heading/H2Heading";
+import { usePostContext } from "@/contexts/UploadPosts";
 
 export default function AddPost() {
   const [formData, setFormData] = useState({
@@ -17,6 +18,7 @@ export default function AddPost() {
     file: null as File | null,
   });
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const { addPost } = usePostContext();
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -50,28 +52,26 @@ export default function AddPost() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // console.log("Description:", formData.description);
-    // console.log("File:", formData.file);
-
-    const formDataToSend = new FormData();
-    formDataToSend.append("description", formData.description);
-    formDataToSend.append("title", formData.title);
+    const formDataToSend: any = {};
+    formDataToSend["description"] = formData.description;
+    // ("description", formData.description);
+    formDataToSend["title"] = formData.title;
+    console.log(formData.file);
     if (formData.file) {
-      formDataToSend.append("file", formData.file);
-    }
-    console.log("formDataToSend:", formDataToSend.get("title"));
-    // Now you can send formDataToSend to your server using an API call
-    // try {
-    //   const response = await fetch('YOUR_SERVER_ENDPOINT', {
-    //     method: 'POST',
-    //     body: formDataToSend,
-    //   });
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        // Read the image as base64 and add it to the formDataToSend
+        const imageBase64 = event.target!.result as string;
+        formDataToSend["image"] = imageBase64;
 
-    //   // Handle the server response here
-    //   console.log('Server Response:', response);
-    // } catch (error) {
-    //   console.error('Error:', error);
-    // }
+        addPost(formDataToSend);
+        console.log(formDataToSend, "inside if");
+      };
+      reader.readAsDataURL(formData.file);
+    } else {
+      addPost(formDataToSend);
+      console.log(formDataToSend, "inside else");
+    }
   };
 
   return (
@@ -123,7 +123,7 @@ export default function AddPost() {
         </div>
         <Button type="submit">Submit</Button>
         {selectedImage && (
-          <div className="mt-4">
+          <div className="mt-4 w-40 h-40">
             <h2 className="font-bold mb-2">Selected Image Preview:</h2>
             <img src={selectedImage} alt="Selected" className="max-w-full" />
           </div>

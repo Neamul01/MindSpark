@@ -6,19 +6,19 @@ import React from "react";
 import Layout from "../Layouts/Layout/Layout";
 import { usePathname } from "next/navigation";
 import AppLogo from "../Common/AppLogo";
+import Link from "next/link";
 
 export default function SiteNavbar() {
   const router = usePathname();
 
   const navTabs = navbarTabs.map((tab) => (
-    <Navbar.Link
-      active={router.indexOf(tab.href) !== -1}
+    <Link
       key={tab.id}
       href={tab.href}
       className="text-secondary active:text-primary"
     >
       {tab.title}
-    </Navbar.Link>
+    </Link>
   ));
   return (
     <Layout>
