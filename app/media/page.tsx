@@ -3,12 +3,16 @@ import Layout from "@/components/Layouts/Layout/Layout";
 import { usePostContext } from "@/contexts/UploadPosts";
 import { Card } from "flowbite-react";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 export default function Page() {
   const { posts } = usePostContext();
-  posts.map((post) => console.log(post));
-  console.log("posts", posts);
+  const [like, setLike] = useState(false);
+
+  const handleLike = () => {
+    setLike(!like);
+    console.log(like);
+  };
   return (
     <Layout parentClass="py-20">
       <div className="bg-white text-black grid grid-cols-12 gap-4">
@@ -31,6 +35,26 @@ export default function Page() {
                   ? post.description.slice(0, 50) + "..."
                   : post.description}
               </p>
+            </div>
+            <div className="flex items-center gap-2">
+              {like === true ? (
+                <p
+                  onClick={handleLike}
+                  className={`border rounded-xl px-3 py-1 my-3 cursor-pointer hover:bg-red-500 
+                }}`}
+                >
+                  like
+                </p>
+              ) : (
+                <p
+                  onClick={handleLike}
+                  className={`border rounded-xl px-3 py-1 my-3 cursor-pointer bg-red-500 
+                }}`}
+                >
+                  like
+                </p>
+              )}
+              <span>:20</span>
             </div>
           </div>
         ))}
