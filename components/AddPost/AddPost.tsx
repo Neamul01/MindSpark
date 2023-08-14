@@ -16,9 +16,10 @@ export default function AddPost() {
     title: "",
     description: "",
     file: null as File | null,
+    like: 0,
   });
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const { addPost } = usePostContext();
+  const { posts, addPost } = usePostContext();
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

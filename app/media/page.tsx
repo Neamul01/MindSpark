@@ -54,7 +54,7 @@ export default function Page() {
                   like
                 </p>
               )}
-              <span>:20</span>
+              <span>{post.like}</span>
             </div>
           </div>
         ))}
