@@ -10,6 +10,7 @@ import {
 import React, { ChangeEvent, useState } from "react";
 import H2Heading from "../Common/H2Heading/H2Heading";
 import { usePostContext } from "@/contexts/UploadPosts";
+import PostCard from "../Cards/PostCard";
 
 export default function AddPost() {
   const [formData, setFormData] = useState({
@@ -75,6 +76,9 @@ export default function AddPost() {
     }
   };
 
+  const sortedPosts = [...posts].sort((a, b) => b.like - a.like);
+  console.log("sortedData", sortedPosts);
+
   return (
     <div className="w-full">
       <div>
@@ -123,13 +127,21 @@ export default function AddPost() {
           />
         </div>
         <Button type="submit">Submit</Button>
-        {selectedImage && (
+        {/* {selectedImage && (
           <div className="mt-4 w-40 h-40">
             <h2 className="font-bold mb-2">Selected Image Preview:</h2>
             <img src={selectedImage} alt="Selected" className="max-w-full" />
           </div>
-        )}
+        )} */}
       </form>
+      <div className=" my-20">
+        <h2 className="text-2xl font-bold">Feature Posts</h2>
+        <div className="grid md:grid-cols-12 gap-4">
+          {sortedPosts.map((post, i) => (
+            <PostCard key={i} post={post} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
