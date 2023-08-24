@@ -1,15 +1,16 @@
 "use client";
 import { navbarTabs } from "@/constants/navTabs";
-import { Avatar, Dropdown, Navbar } from "flowbite-react";
+import { Avatar, Button, Dropdown, Navbar } from "flowbite-react";
 import Image from "next/image";
 import React from "react";
 import Layout from "../Layouts/Layout/Layout";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import AppLogo from "../Common/AppLogo";
 import Link from "next/link";
 
 export default function SiteNavbar() {
   const router = usePathname();
+  const route = useRouter();
 
   const navTabs = navbarTabs.map((tab) => (
     <Link
@@ -20,6 +21,12 @@ export default function SiteNavbar() {
       {tab.title}
     </Link>
   ));
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    route.push("/auth/login");
+  };
+
   return (
     <Layout>
       <Navbar fluid rounded>
@@ -43,7 +50,7 @@ export default function SiteNavbar() {
             </Dropdown.Header>
             {navTabs}
             <Dropdown.Divider />
-            <p>Sign out</p>
+            <Button onClick={handleLogout}>Sign out</Button>
           </Dropdown>
           <Navbar.Toggle />
         </div>
