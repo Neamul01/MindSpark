@@ -8,9 +8,9 @@ export default function Layout({ children }: { children: ReactNode }) {
   useEffect(() => {
     const userString = localStorage.getItem("user");
     const user: any | null = userString ? JSON.parse(userString) : null;
-    console.log(user);
-    if (user) {
-      router.push("/");
+    console.log(Object.keys(user).length);
+    if (Object.keys(user).length) {
+      // router.push("/");
     } else {
       router.push("/auth/login");
       console.log(user);

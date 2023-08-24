@@ -1,15 +1,26 @@
+"use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export default function PostCard({ post }: any) {
   const [like, setLike] = useState(false);
+  const router = useRouter();
 
   const handleLike = () => {
     setLike(!like);
     console.log(like);
   };
+
+  const handleClick = () => {
+    router.push(`/media/${post.id}`);
+  };
+
   return (
-    <div className="flex flex-col items-center col-span-3 shadow-lg p-4 pb-8 rounded-lg justify-between">
+    <div
+      onClick={handleClick}
+      className="flex flex-col items-center col-span-3 shadow-lg p-4 pb-8 rounded-lg justify-between cursor-pointer text-black"
+    >
       {post.image && (
         <div className="w-[200px] h-[200px] relative rounded-xl overflow-hidden ">
           <Image fill src={post.image && post.image} alt="Post" />
