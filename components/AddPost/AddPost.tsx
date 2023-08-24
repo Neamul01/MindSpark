@@ -11,6 +11,7 @@ import React, { ChangeEvent, useState } from "react";
 import H2Heading from "../Common/H2Heading/H2Heading";
 import { usePostContext } from "@/contexts/UploadPosts";
 import PostCard from "../Cards/PostCard";
+import { useRouter } from "next/navigation";
 
 export default function AddPost() {
   const [formData, setFormData] = useState({
@@ -21,6 +22,7 @@ export default function AddPost() {
   });
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const { posts, addPost } = usePostContext();
+  const router = useRouter();
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -52,27 +54,36 @@ export default function AddPost() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    const user = localStorage.getItem("user");
+    console.log(user);
 
-    const formDataToSend: any = {};
-    formDataToSend["description"] = formData.description;
-    // ("description", formData.description);
-    formDataToSend["title"] = formData.title;
-    console.log(formData.file);
-    if (formData.file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        // Read the image as base64 and add it to the formDataToSend
-        const imageBase64 = event.target!.result as string;
-        formDataToSend["image"] = imageBase64;
+    if (user !== null) {
+      e.preventDefault();
 
+      const formDataToSend: any = {};
+      formDataToSend["description"] = formData.description;
+      // ("description", formData.description);
+      formDataToSend["title"] = formData.title;
+      console.log(formData.file);
+      if (formData.file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          // Read the image as base64 and add it to the formDataToSend
+          const imageBase64 = event.target!.result as string;
+          formDataToSend["image"] = imageBase64;
+
+          addPost(formDataToSend);
+          console.log(formDataToSend, "inside if");
+        };
+        reader.readAsDataURL(formData.file);
+      } else {
         addPost(formDataToSend);
-        console.log(formDataToSend, "inside if");
-      };
-      reader.readAsDataURL(formData.file);
+        console.log(formDataToSend, "inside else");
+      }
     } else {
-      addPost(formDataToSend);
-      console.log(formDataToSend, "inside else");
+      e.preventDefault();
+
+      router.push("/auth/login");
     }
   };
 
@@ -92,7 +103,6 @@ export default function AddPost() {
           <TextInput
             id="title"
             placeholder="Write title here..."
-            required
             type="text"
             name="title"
             onChange={handleChange}
