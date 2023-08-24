@@ -45,7 +45,7 @@ export default function SiteNavbar() {
             <Dropdown.Header>
               <span className="block text-sm">Bonnie Green</span>
               <span className="block truncate text-sm font-medium">
-                name@flowbite.com
+                name@gmail.com
               </span>
             </Dropdown.Header>
             {navTabs}
