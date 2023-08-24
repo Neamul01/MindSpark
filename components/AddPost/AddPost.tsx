@@ -77,7 +77,7 @@ export default function AddPost() {
   };
 
   const sortedPosts = [...posts].sort((a, b) => b.like - a.like);
-  console.log("sortedData", sortedPosts);
+  // console.log("sortedData", sortedPosts);
 
   return (
     <div className="w-full">
