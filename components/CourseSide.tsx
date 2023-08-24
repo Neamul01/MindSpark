@@ -6,7 +6,7 @@ import { RxCross2 } from "react-icons/rx";
 
 export default function CourseSide() {
   return (
-    <div className="overflow-hidden bg-white p-2 md:p-6 rounded-lg pt-4">
+    <div className="overflow-hidden bg-white p-2 md:p-6 rounded-lg pt-4 text-black">
       <h2 className="text-2xl font-semibold">Tags:</h2>
       <div className=" flex flex-col gap-8">
         <div className="flex flex-wrap gap-2">

@@ -1,4 +1,6 @@
+"use client";
 import CourseSide from "@/components/CourseSide";
+
 import CurriculumTab from "@/components/CurriculumTab";
 import OverviewTab from "@/components/OverviewTab";
 import { Breadcrumb, Tabs } from "flowbite-react";
@@ -8,9 +10,8 @@ import React from "react";
 
 export default function Page() {
   const params = useParams();
-  console.log(params);
   return (
-    <div className="mt-20 md:mt-0">
+    <div className="mt-20 md:mt-0 max-w-7xl mx-auto">
       {/* <div>
           <h2 className="text-xl font-semibold mb-4">Add New Course</h2>
           <Breadcrumb

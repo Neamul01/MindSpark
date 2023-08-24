@@ -6,7 +6,7 @@ import ReviewCard from "./ReviewCard";
 export default function OverviewTab() {
   return (
     <div className="">
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 text-black">
         <p>
           IBM is the second-largest Predictive, consectetur adipiscing elit. Sit
           turpis egestas aenean amet ac rhoncus vitae tristique. A sed magna
@@ -27,7 +27,7 @@ export default function OverviewTab() {
           tristique quam commodo felis nulla.
         </p>
       </div>
-      <div className=" mt-8">
+      <div className=" mt-8 text-black">
         <h3 className="text-2xl mb-4 font-semibold">Reviews</h3>
         {[1, 2].map((item, index) => (
           <ReviewCard key={index} />

@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -18,7 +19,7 @@ export default function PostCard({ post }: any) {
   return (
     <div
       onClick={handleClick}
-      className="flex flex-col items-center col-span-3 shadow-lg p-4 pb-8 rounded-lg justify-between"
+      className="flex flex-col items-center col-span-3 shadow-lg p-4 pb-8 rounded-lg justify-between cursor-pointer text-black"
     >
       {post.image && (
         <div className="w-[200px] h-[200px] relative rounded-xl overflow-hidden ">
