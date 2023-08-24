@@ -1,10 +1,21 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 
 export default function Layout({ children }: { children: ReactNode }) {
-  const user = localStorage?.getItem("user");
   const router = useRouter();
-  console.log(user);
-  return <>{user ? children : router.push("/auth/login")}</>;
+
+  useEffect(() => {
+    const userString = localStorage.getItem("user");
+    const user: any | null = userString ? JSON.parse(userString) : null;
+    console.log(user);
+    if (user) {
+      router.push("/");
+    } else {
+      router.push("/auth/login");
+      console.log(user);
+    }
+  }, [router]);
+
+  return <>{children}</>;
 }
